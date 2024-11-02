@@ -20,7 +20,7 @@ const Works = ({ works }) => {
     );
 
     if (confirm) {
-      const res = await fetch(`http://localhost:3000/api/works?id=${id}`, {
+      const res = await fetch(`https://livingbranddashboard.vercel.app/api/works?id=${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

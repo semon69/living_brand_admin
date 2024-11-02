@@ -16,7 +16,7 @@ const WorkModal = ({ workId, modalId }) => {
       const fetchWorkData = async () => {
         setLoading(true);
         try {
-          const response = await fetch(`/api/works/${workId}`);
+          const response = await fetch(`https://livingbranddashboard.vercel.app/api/works/${workId}`);
           const result = await response.json();
           console.log(result);
           if (response.ok) {
@@ -50,7 +50,7 @@ const WorkModal = ({ workId, modalId }) => {
     );
     setLoading(true);
     try {
-      const response = await fetch(`/api/works/${workId}`, {
+      const response = await fetch(`https://livingbranddashboard.vercel.app/api/works/${workId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

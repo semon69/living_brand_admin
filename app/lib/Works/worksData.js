@@ -9,7 +9,8 @@ export default function WorksData() {
   useEffect(() => {
     const fetchWorks = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/works", {
+        const response = await fetch("https://livingbranddashboard.vercel.app/api/works", {
+          mode: "cors",
           cache: "no-store",
         });
         const data = await response.json();

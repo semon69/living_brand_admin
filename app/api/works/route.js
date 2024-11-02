@@ -1,12 +1,24 @@
 import { connectToDB } from "@/app/lib/connectToDB";
 import { Works } from "@/app/lib/Works/model";
-import corsMiddleware from "@/lib/corsMiddleware";
 import { NextResponse } from "next/server";
 
-export async function GET(req, res) {
-  await corsMiddleware(req, res);
-
-  if (res.headersSent) return;
+// export async function GET(req, res) {
+//   try {
+//     await cors(req, res);
+//     await connectToDB();
+//     const works = await Works.find();
+//     return NextResponse.json(works);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+export async function GET(req) {
+  // // Apply CORS headers
+  // await NextCors(req, NextResponse.next(), {
+  //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  //   origin: '*', // Replace with your domain if needed, e.g., 'https://your-frontend-domain.com'
+  //   optionsSuccessStatus: 200,
+  // });
 
   try {
     await connectToDB();
@@ -14,6 +26,7 @@ export async function GET(req, res) {
     return NextResponse.json(works);
   } catch (error) {
     console.log(error);
+    return NextResponse.json({ error: 'An error occurred' }, { status: 500 });
   }
 }
 
