@@ -1,11 +1,20 @@
 import { connectToDB } from "@/app/lib/connectToDB";
 import { Works } from "@/app/lib/Works/model";
+import corsMiddleware from "@/lib/corsMiddleware";
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  await connectToDB();
-  const works = await Works.find();
-  return NextResponse.json(works);
+export async function GET(req, res) {
+  await corsMiddleware(req, res);
+
+  if (res.headersSent) return;
+
+  try {
+    await connectToDB();
+    const works = await Works.find();
+    return NextResponse.json(works);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function POST(req) {
